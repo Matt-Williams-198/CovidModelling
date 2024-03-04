@@ -1,0 +1,27 @@
+Ceff = 0.01;
+w = 0.5;
+ModelLength = 10.0;
+SpatialDiscretization = 100;
+SpatialVector = linspace(0,ModelLength,SpatialDiscretization);
+S0 = gaussmf(SpatialVector, [1 ModelLength/2]);
+I0 = 0.001 * S0;
+S0 = S0 - I0;
+R0 = zeros(1,SpatialDiscretization)+ 0.001;
+
+tspan = [0, 10];  % Time span for integration
+
+% Solve the ODE using ode45
+P0 = [S0; I0; R0];
+[t, y] = ode45(@SIR, tspan, [S0; I0; R0]);
+
+% Extract the state variables
+S = y(:,1:100);  % Susceptible
+I = y(:,101:200);  % Infected
+R = y(:,301:300; 
+
+% Plot the solution (if needed)
+plot(t, S, 'b-', t, I, 'r--', t, R, 'g-.');
+xlabel('Time');
+ylabel('Population');
+legend('Susceptible (S)', 'Infected (I)', 'Recovered (R)');
+title('SIR Model Solution');

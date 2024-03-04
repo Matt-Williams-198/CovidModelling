@@ -1,0 +1,6 @@
+function [S,I,R] = SIR(S_0,I_0,R_0,Ceff, w, dt)
+    S = - Ceff * S * I;
+    I = Ceff * S * I - w * I;
+    R = w * I;
+end
+
